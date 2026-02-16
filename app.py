@@ -114,8 +114,14 @@ if st.session_state.vector_db:
     user_query = st.text_input("Ask a question about your documents:")
 
     if user_query:
-        # Similarity Search (Retrieve top 4 relevant chunks)
-        retriever = st.session_state.vector_db.as_retriever(search_kwargs={"k": 4})
+        # Similarity Search
+        retriever = st.session_state.vector_db.as_retriever(
+            search_type="similarity_score_threshold",
+            search_kwargs={
+                "k": 4,                # Maximum number of chunks to ever show
+                "score_threshold": 0.5 # Minimum "quality" score to be included
+            }
+        )
         context_docs = retriever.invoke(user_query)
 
         # Augmentation (Merging context with the prompt)
@@ -163,6 +169,7 @@ if st.session_state.vector_db:
 else:
 
     st.info("Upload one or multiple PDFs to begin.")
+
 
 
 
