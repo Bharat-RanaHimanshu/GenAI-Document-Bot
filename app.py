@@ -94,7 +94,7 @@ if uploaded_files:
                 data = loader.load()
 
                 # Here we split text into 1000-character chunks with overlap which ensures no context is lost between chunks.
-                text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+                text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=100)
                 chunks = text_splitter.split_documents(data)
 
                 # Here we create or ddd to Vector Database (FAISS)
@@ -169,6 +169,7 @@ if st.session_state.vector_db:
 else:
 
     st.info("Upload one or multiple PDFs to begin.")
+
 
 
 
