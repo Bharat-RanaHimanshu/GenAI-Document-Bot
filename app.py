@@ -120,8 +120,8 @@ if st.session_state.vector_db:
             search_type="mmr",
             search_kwargs={
                 "k": 8,                # Maximum number of chunks to ever show
-                "score_threshold": 0.40, # Minimum "quality" score to be included
-                'fetch_k': 20
+                "score_threshold": 0.40 # Minimum "quality" score to be included
+                # 'fetch_k': 20
             }
         )
         context_docs = retriever.invoke(user_query)
@@ -171,6 +171,7 @@ if st.session_state.vector_db:
 else:
 
     st.info("Upload one or multiple PDFs to begin.")
+
 
 
 
