@@ -1,7 +1,7 @@
 import streamlit as st
 import sqlite3
 import os
-from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -67,10 +67,10 @@ with st.sidebar:
         st.rerun()
 
     st.write("---")
-
+    
     uploaded_files = st.file_uploader(
-        "Upload PDF(s)",
-        type="pdf",
+        "Upload PDF or TXT files",
+        type=["pdf", "txt"],
         accept_multiple_files=True,
         key=f"uploader_{st.session_state.uploader_key}"
     )
@@ -86,8 +86,11 @@ if uploaded_files:
                 with open(file_path, "wb") as f:
                     f.write(uploaded_file.getbuffer())
 
-                # This loads PDF text
-                loader = PyPDFLoader(file_path)
+                # DYNAMIC LOADER LOGIC
+                if file_path.endswith(".pdf"):
+                    loader = PyPDFLoader(file_path)
+                elif file_path.endswith(".txt"):
+                    loader = TextLoader(file_path, encoding='utf-8')
                 data = loader.load()
 
                 # Here we split text into 1000-character chunks with overlap which ensures no context is lost between chunks.
@@ -140,10 +143,11 @@ if st.session_state.vector_db:
         with st.expander(" View Citations (Source & Page)"):
             for i, doc in enumerate(context_docs):
                 source_name = doc.metadata.get('source', 'Unknown')
-                # Metadata page starts at 0, so we add 1 for the user.
-                real_page_num = int(doc.metadata.get('page', 0)) + 1
-
-                st.markdown(f"**Source {i+1}:** `{source_name}` — **Page {real_page_num}**")
+                # metadata 'page' exists for PDFs, but might not for TXT
+                page = doc.metadata.get('page')
+                page_info = f"— **Page {int(page) + 1}**" if page is not None else ""
+                
+                st.markdown(f"**Source {i+1}:** `{source_name}` {page_info}")
                 st.info(doc.page_content)
 
         # The FEEDBACK SYSTEM
@@ -159,6 +163,7 @@ if st.session_state.vector_db:
 else:
 
     st.info("Upload one or multiple PDFs to begin.")
+
 
 
 
