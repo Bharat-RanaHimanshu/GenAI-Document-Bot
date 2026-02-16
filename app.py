@@ -42,12 +42,7 @@ if 'uploader_key' not in st.session_state:
 def load_models():
     embed = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     
-    # # Check if key is in Streamlit Secrets (for Cloud) 
-    # # or local environment (for testing)
-    # groq_key = st.secrets["GROQ_API_KEY"] 
-    
     llm = ChatGroq(
-        # groq_api_key=groq_key,
         model_name="llama-3.3-70b-versatile", # Can also use : llama-3.1-8b-instant <-- Faster
         temperature=0
     )
@@ -164,6 +159,7 @@ if st.session_state.vector_db:
 else:
 
     st.info("Upload one or multiple PDFs to begin.")
+
 
 
 
