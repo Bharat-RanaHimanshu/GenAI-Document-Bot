@@ -42,9 +42,9 @@ if 'uploader_key' not in st.session_state:
 def load_models():
     embed = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     
-    # Check if key is in Streamlit Secrets (for Cloud) 
-    # or local environment (for testing)
-    groq_key = st.secrets["GROQ_API_KEY"] 
+    # # Check if key is in Streamlit Secrets (for Cloud) 
+    # # or local environment (for testing)
+    # groq_key = st.secrets["GROQ_API_KEY"] 
     
     llm = ChatGroq(
         groq_api_key=groq_key,
@@ -59,7 +59,7 @@ init_db()
 
 # Here is the user interface
 st.set_page_config(page_title="GenAI Document Bot", layout="wide")
-st.title("Multi-Document Chatbot")
+st.title("GenAI Multi-Document Chatbot")
 
 with st.sidebar:
     st.header("Document Library")
@@ -164,4 +164,5 @@ if st.session_state.vector_db:
 else:
 
     st.info("Upload one or multiple PDFs to begin.")
+
 
