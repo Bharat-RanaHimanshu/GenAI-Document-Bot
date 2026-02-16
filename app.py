@@ -119,7 +119,7 @@ if st.session_state.vector_db:
             search_type="similarity_score_threshold",
             search_kwargs={
                 "k": 4,                # Maximum number of chunks to ever show
-                "score_threshold": 0.5 # Minimum "quality" score to be included
+                "score_threshold": 0.4 # Minimum "quality" score to be included
             }
         )
         context_docs = retriever.invoke(user_query)
@@ -169,6 +169,7 @@ if st.session_state.vector_db:
 else:
 
     st.info("Upload one or multiple PDFs to begin.")
+
 
 
 
