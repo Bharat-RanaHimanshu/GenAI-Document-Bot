@@ -114,13 +114,13 @@ if st.session_state.vector_db:
     user_query = st.text_input("Ask a question about your documents:")
 
     if user_query:
-        # Similarity Search
+        # Maximal Marginal Relevance Search
         retriever = st.session_state.vector_db.as_retriever(
             # search_type="similarity_score_threshold",
             search_type="mmr",
             search_kwargs={
                 "k": 8,                # Maximum number of chunks to ever show
-                "score_threshold": 0.40 # Minimum "quality" score to be included
+                "score_threshold": 0.40 # Minimum "quality" score to be included, at least 60% relevant.
                 # 'fetch_k': 20
             }
         )
@@ -171,6 +171,7 @@ if st.session_state.vector_db:
 else:
 
     st.info("Upload one or multiple PDFs to begin.")
+
 
 
 
