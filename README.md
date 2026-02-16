@@ -1,6 +1,3 @@
-# GenAI-Document-Bot
-To provide a secure, local-first environment where users can upload sensitive PDF documents (SOPs, Policies, FAQs) and receive answers anchored strictly in that data with verifiable page citations.
-
 # 🤖 GenAI Document Bot 📄
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://genai-document-bot-h4wkdyqr4z2xwlid4ffy7x.streamlit.app/)
@@ -23,7 +20,7 @@ A high-performance **Retrieval-Augmented Generation (RAG)** application that all
 ## 🛠️ Tech Stack
 * **Framework:** [Streamlit](https://streamlit.io/)
 * **Orchestration:** [LangChain](https://www.langchain.com/)
-* **LLM:** [Groq](https://groq.com/) (Llama 3.1 8B)
+* **LLM:** [Groq](https://groq.com/) (llama-3.3-70b-versatile)
 * **Embeddings:** [HuggingFace](https://huggingface.co/) (all-MiniLM-L6-v2)
 * **Vector Database:** [FAISS](https://github.com/facebookresearch/faiss)
 * **Database:** SQLite
@@ -35,7 +32,7 @@ A high-performance **Retrieval-Augmented Generation (RAG)** application that all
 4.  **Generation:** The LLM generates a response based *only* on the provided context.
 
 ## ⚙️ Setup
-1. Clone the repository: `git clone https://github.com/your-username/genai-document-bot.git`
+1. Clone the repository: `git clone https://github.com/Bharat-RanaHimanshu/GenAI-Document-Bot.git`
 2. Install dependencies: `pip install -r requirements.txt`
 3. Set up your `.streamlit/secrets.toml` with your `GROQ_API_KEY`.
 4. Run the app: `streamlit run app.py`
