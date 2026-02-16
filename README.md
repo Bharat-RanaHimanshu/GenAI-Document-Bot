@@ -2,7 +2,7 @@
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://genai-document-bot-h4wkdyqr4z2xwlid4ffy7x.streamlit.app/)
 
-A high-performance **Retrieval-Augmented Generation (RAG)** application that allows users to chat with their own PDF documents (Policies, SOPs, FAQs) securely and with full transparency.
+A high-performance **Retrieval-Augmented Generation (RAG)** application that allows users to chat with their own PDF/TXT documents (Policies, SOPs, FAQs) securely and with full transparency.
 
 ---
 
@@ -26,9 +26,10 @@ A high-performance **Retrieval-Augmented Generation (RAG)** application that all
 * **Database:** SQLite
 
 ## 📖 How it Works
-1.  **Upload:** User uploads one or multiple PDF documents.
+1.  **Upload:** User uploads one or multiple PDF/TXT documents.
 2.  **Indexing:** Documents are split into chunks, embedded into vectors, and stored in a local FAISS index.
-3.  **Querying:** When a question is asked, the system retrieves the top 4 most relevant chunks.
+3.  **Querying:** When a question is asked, the system retrieves at most top 8 most relevant chunks that satisfy the Similarity
+Threshold = 0.40(at least 60% relevant) to filter out low-quality 'noise' that doesn't strictly match the query. 
 4.  **Generation:** The LLM generates a response based *only* on the provided context.
 
 ## ⚙️ Setup
