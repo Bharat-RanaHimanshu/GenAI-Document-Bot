@@ -48,7 +48,7 @@ def load_models():
     
     llm = ChatGroq(
         groq_api_key=groq_key,
-        model_name="llama-3.2-1b-preview",
+        model_name="llama-3.1-8b-instant",
         temperature=0
     )
     return embed, llm
@@ -162,4 +162,5 @@ if st.session_state.vector_db:
             save_feedback(user_query, response, "Not Helpful")
             st.toast("Feedback saved for improvement.")
 else:
+
     st.info("Upload one or multiple PDFs to begin.")
